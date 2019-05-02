@@ -1,4 +1,5 @@
 import React from 'react';
+import { saveAnswer } from '../../utils/api/pollsAPI';
 import url from '../../constants/url'
 
 import './questionDetails.css'
@@ -29,22 +30,25 @@ class QuestionDetails extends React.Component {
   }
 
   saveAnswer() {
-    const saveQuestionUrl = `${url.questionsUrl}${this.state.selectedChoice.url}`
+    saveAnswer(this.state.selectedChoice).then((res) => {
+      if(res.success) this.props.history.push('/1');
+    });
+    // const saveQuestionUrl = `${url.questionsUrl}${this.state.selectedChoice.url}`
 
-    fetch(saveQuestionUrl, { method: 'POST' })
-      .then(res => res.json())
-      .then(data => {
-        if (data.url === this.state.selectedChoice.url) {
-          this.props.history.push('/1');
-        }
-      })
-      .catch(() => {
-        this.setState({ error: true });
-      });
+    // fetch(saveQuestionUrl, { method: 'POST' })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.url === this.state.selectedChoice.url) {
+    //       this.props.history.push('/1');
+    //     }
+    //   })
+    //   .catch(() => {
+    //     this.setState({ error: true });
+    //   });
   }
 
   render() {
-    const { choices, question } = this.state;
+    const { choices, question, selectedChoice } = this.state;
     const allVotes = choices.reduce((a, b) => a + b.votes, 0);
 
     return (
@@ -65,7 +69,7 @@ class QuestionDetails extends React.Component {
             </span>
           </div>
         )}
-        <input type="button" value="Vote" onClick={() => this.saveAnswer()} />
+        <input disabled={selectedChoice === ''} type="button" value="Vote" onClick={() => this.saveAnswer()} />
       </div>
     );
   }
