@@ -5,14 +5,16 @@ import QuestionList from './components/QuestionList';
 import QuestionDetails from './components/QuestionDetails';
 import AddQuestion from './components/AddQuestion';
 
+import url from './constants/url';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Route path="/question/add" component={AddQuestion}/>
-        <Route path="/questions/:id" component={QuestionDetails} />
+        <Route path={url.addQuestion} component={AddQuestion}/>
+        <Route path={`${url.questions}/:id`} component={QuestionDetails} />
         <Route path="/:page" component={QuestionList} exact />
       </Router>
     </div>

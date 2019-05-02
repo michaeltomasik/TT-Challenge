@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment';
 import { getQuestionsPage } from '../../utils/api/pollsAPI';
 
+import url from '../../constants/url';
+
 import './questionList.css';
 
 class QuestionList extends React.Component {
@@ -28,6 +30,11 @@ class QuestionList extends React.Component {
 
     return (
       <div className="QuestionList">
+        <input
+          className="QuestionList-new"
+          value="ADD NEW"
+          type="button"
+          onClick={() => {this.props.history.push(url.addQuestion)}}/>
         <h1>Questions</h1>
         <div className="QuestionList-list">
           {questionList.map((question, key) => (

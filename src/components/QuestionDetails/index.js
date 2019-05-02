@@ -61,6 +61,11 @@ class QuestionDetails extends React.Component {
           type="button"
           value="Save Vote"
           onClick={() => this.save()} />
+          <input
+            className="QuestionDetails-button"
+            type="button"
+            value="Back"
+            onClick={() => this.props.history.goBack()} />
       </div>
     );
   }

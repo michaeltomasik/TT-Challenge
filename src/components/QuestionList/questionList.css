@@ -2,6 +2,13 @@
   max-width: 800px;
 }
 
+.QuestionList-new {
+  margin: 20px;
+  width: 100px;
+  color: red;
+  cursor: pointer;
+}
+
 .QuestionList-list {
   display: flex;
   flex-wrap: wrap;
