@@ -28,10 +28,25 @@ class QuestionDetails extends React.Component {
     this.setState({ selectedChoice: selected });
   }
 
+  saveAnswer() {
+    const saveQuestionUrl = `${url.questionsUrl}${this.state.selectedChoice.url}`
+
+    fetch(saveQuestionUrl, { method: 'POST' })
+      .then(res => res.json())
+      .then(data => {
+        if (data.url === this.state.selectedChoice.url) {
+          this.props.history.push('/1');
+        }
+      })
+      .catch(() => {
+        this.setState({ error: true });
+      });
+  }
+
   render() {
     const { choices, question } = this.state;
     const allVotes = choices.reduce((a, b) => a + b.votes, 0);
-    console.log(this.state);
+
     return (
       <div className="QuestionDetails">
         <h1>Question Details</h1>
@@ -45,11 +60,12 @@ class QuestionDetails extends React.Component {
               <input
                 type="radio"
                 value={answer.choice}
-                checked={this.state.selectedChoice === answer.choice} 
-                onChange={() => this.selectAnswer(answer.choice)} />
+                checked={this.state.selectedChoice.choice === answer.choice} 
+                onChange={() => this.selectAnswer(answer)} />
             </span>
           </div>
         )}
+        <input type="button" value="Vote" onClick={() => this.saveAnswer()} />
       </div>
     );
   }

@@ -34,11 +34,10 @@ class QuestionList extends React.Component {
     console.log(this.props);
     const { questionList } = this.state;
 
-    console.log(questionList);
     return (
       <div className="QuestionList">
-        {questionList.map(question => (
-          <div className="QuestionList-question"
+        {questionList.map((question, key) => (
+          <div key={`question=${key}`} className="QuestionList-question"
             onClick={() => { 
               this.handleOnClick(question.url);
             }}>
