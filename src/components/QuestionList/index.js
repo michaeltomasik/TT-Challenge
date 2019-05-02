@@ -36,8 +36,8 @@ class QuestionList extends React.Component {
                 this.handleOnClick(question.url);
               }}>
               <h1>{question.question}</h1>
-              <p>{moment(question.published_at).format("MMMD DD YY")}</p>
-              <p>{question.choices.length}</p>
+              <p><b>published at:</b> {moment(question.published_at).format("MM.DD.YY")}</p>
+              <p><b>choices:</b> {question.choices.length}</p>
             </div>
           ))}
         </div>

@@ -8,6 +8,14 @@ export const saveAnswer = (selectedChoice) => new Promise((resolve, reject) =>
     .catch(() => reject({ error: true })));
 
 
+export const saveQuestion = (questionObj, page) => new Promise((resolve, reject) =>
+  fetch(`${url.questionsUrl}/questions?page=${page}`,
+    { method: 'POST', body: JSON.stringify(questionObj) })
+    .then(res => res.json())
+    .then(data => resolve({ success: true, page }))
+    .catch(() => reject({ error: true })));
+
+
 export const getQuestion = (id = 1) => new Promise((resolve, reject) =>
   fetch(`${url.questionsUrl}/questions/${id}`)
     .then(res => res.json())

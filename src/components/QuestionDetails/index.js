@@ -3,8 +3,8 @@ import { saveAnswer, getQuestion } from '../../utils/api/pollsAPI';
 
 import './questionDetails.css';
 class QuestionDetails extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       choices: [],
@@ -13,7 +13,7 @@ class QuestionDetails extends React.Component {
   }
 
   componentDidMount() {
-    getQuestion(this.state.id).then(res => {
+    getQuestion(this.props.match.params.id).then(res => {
       this.setState({ ...res.data });
     });
   }
@@ -37,21 +37,23 @@ class QuestionDetails extends React.Component {
         <h1>Question Details</h1>
         <h2>Question: {question}</h2>
         <table className="QuestionDetails-table" >
-          {choices.map((answer, key) =>
-            <tr key={`answer-${key}`}>
-              <td>{answer.choice}</td>
-              <td>{answer.votes}</td>
-              <td>{Math.floor((answer.votes/allVotes)*100)}%</td>
-              <td>
-                <input
-                  className="QuestionDetails-button"
-                  type="radio"
-                  value={answer.choice}
-                  checked={this.state.selectedChoice.choice === answer.choice} 
-                  onChange={() => this.selectAnswer(answer)} />
-              </td>
-            </tr>
-          )}
+          <tbody>
+            {choices.map((answer, key) =>
+              <tr key={`answer-${key}`}>
+                <td>{answer.choice}</td>
+                <td>{answer.votes}</td>
+                <td>{Math.floor((answer.votes/allVotes)*100) || 0}%</td>
+                <td>
+                  <input
+                    className="QuestionDetails-button"
+                    type="radio"
+                    value={answer.choice}
+                    checked={this.state.selectedChoice.choice === answer.choice} 
+                    onChange={() => this.selectAnswer(answer)} />
+                </td>
+              </tr>
+            )}
+          </tbody>
         </table>
         <input
           className="QuestionDetails-button"
