@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment';
-import url from '../../constants/url'
+import url from '../../constants/url';
 
 import './questionList.css';
 
@@ -12,7 +12,6 @@ class QuestionList extends React.Component {
       error: false,
       questionList: [],
     }
-    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   componentDidMount() {
