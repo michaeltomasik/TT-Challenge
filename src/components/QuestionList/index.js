@@ -12,6 +12,7 @@ class QuestionList extends React.Component {
       error: false,
       questionList: [],
     }
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   componentDidMount() {
@@ -26,14 +27,22 @@ class QuestionList extends React.Component {
       });
   }
 
+  handleOnClick(url) {
+    this.props.history.push(url);
+  }
+
   render() {
+    console.log(this.props);
     const { questionList } = this.state;
 
     console.log(questionList);
     return (
       <div className="QuestionList">
         {questionList.map(question => (
-          <div className="QuestionList-question">
+          <div className="QuestionList-question"
+            onClick={() => { 
+              this.handleOnClick(question.url);
+            }}>
             <h1>{question.question}</h1>
             <p>{moment(question.published_at).format("MMMD DD YY")}</p>
             <p>{question.choices.length}</p>

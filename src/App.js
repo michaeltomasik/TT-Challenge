@@ -7,7 +7,7 @@ import QuestionDetails from './components/QuestionDetails';
 function App() {
   return (
     <Router>
-      <Route path="/question/:id" component={QuestionDetails} />
+      <Route path="/questions/:id" component={QuestionDetails} />
       <Route path="/:page" component={QuestionList} exact />
     </Router>
   );
