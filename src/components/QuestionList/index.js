@@ -1,5 +1,7 @@
 import React from 'react'
 import moment from 'moment';
+import { getQuestionsPage } from '../../utils/api/pollsAPI';
+
 import url from '../../constants/url';
 
 import './questionList.css';
@@ -15,15 +17,8 @@ class QuestionList extends React.Component {
   }
 
   componentDidMount() {
-    const currentPage = this.props.page || 1;
-    const getQuestionsPageUrl = `${url.questionsUrl}/questions?page=${currentPage}`;
-    
-    fetch(getQuestionsPageUrl)
-      .then(res => res.json())
-      .then(data => this.setState({ questionList: data }))
-      .catch(() => {
-        this.setState({ error: true, });
-      });
+    getQuestionsPage(this.props.page)
+      .then(res => this.setState({ questionList: res.data }))
   }
 
   handleOnClick(url) {
@@ -31,7 +26,6 @@ class QuestionList extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { questionList } = this.state;
 
     return (
