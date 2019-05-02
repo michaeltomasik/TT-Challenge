@@ -1,4 +1,8 @@
 .QuestionList {
+  max-width: 800px;
+}
+
+.QuestionList-list {
   display: flex;
   flex-wrap: wrap;
 }

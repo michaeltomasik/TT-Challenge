@@ -1,5 +1,14 @@
-.QuestionDetails-row {
-  display: flex;
+.QuestionDetails {
+  max-width: 800px;
+}
+
+.QuestionDetails-table {
+  width: 100%;
+}
+
+.QuestionDetails-button {
+  float: right;
+  margin-right: 10px;
 }
 
 span {

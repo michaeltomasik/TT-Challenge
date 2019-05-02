@@ -1,8 +1,7 @@
 import React from 'react';
 import { saveAnswer, getQuestion } from '../../utils/api/pollsAPI';
-import url from '../../constants/url'
 
-import './questionDetails.css'
+import './questionDetails.css';
 class QuestionDetails extends React.Component {
   constructor() {
     super();
@@ -37,21 +36,29 @@ class QuestionDetails extends React.Component {
       <div className="QuestionDetails">
         <h1>Question Details</h1>
         <h2>Question: {question}</h2>
-        {choices.map((answer, key) =>
-          <div className="QuestionDetails-row" key={`answer-${key}`}>
-            <span>{answer.choice}</span>
-            <span>{answer.votes}</span>
-            <span>{Math.floor((answer.votes/allVotes)*100)}%</span>
-            <span>
-              <input
-                type="radio"
-                value={answer.choice}
-                checked={this.state.selectedChoice.choice === answer.choice} 
-                onChange={() => this.selectAnswer(answer)} />
-            </span>
-          </div>
-        )}
-        <input disabled={selectedChoice === ''} type="button" value="Vote" onClick={() => this.save()} />
+        <table className="QuestionDetails-table" >
+          {choices.map((answer, key) =>
+            <tr key={`answer-${key}`}>
+              <td>{answer.choice}</td>
+              <td>{answer.votes}</td>
+              <td>{Math.floor((answer.votes/allVotes)*100)}%</td>
+              <td>
+                <input
+                  className="QuestionDetails-button"
+                  type="radio"
+                  value={answer.choice}
+                  checked={this.state.selectedChoice.choice === answer.choice} 
+                  onChange={() => this.selectAnswer(answer)} />
+              </td>
+            </tr>
+          )}
+        </table>
+        <input
+          className="QuestionDetails-button"
+          disabled={selectedChoice === ''}
+          type="button"
+          value="Save Vote"
+          onClick={() => this.save()} />
       </div>
     );
   }
